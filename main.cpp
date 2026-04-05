@@ -21,7 +21,7 @@ int main() {
     pid_t pid_child, wait_result;
     int stat_loc;
     while (true) {
-        std::cout << "my shell >> ";
+        std::cout << "corvus >> ";
         std::getline(std::cin, input);
         command = read_input(input.data());
         pid_child = fork();
