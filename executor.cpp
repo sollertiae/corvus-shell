@@ -44,6 +44,12 @@ void execute_pipeline(std::vector<std::vector<char*>>& commands) {
         } else if (pid_child[i] == 0) {
             int in_fd = (i == 0) ? STDIN_FILENO : fd[i - 1][0];
             int out_fd = (i == command_num - 1) ? STDOUT_FILENO : fd[i][1];
+            for (int j = 0; j < command_num - 1; ++j) {
+                if (fd[j][0] != in_fd)
+                    close(fd[j][0]);
+                if (fd[j][1] != out_fd)
+                    close(fd[j][1]);
+            }
             execute_command(commands[i], in_fd, out_fd);
             _exit(1);
         }
