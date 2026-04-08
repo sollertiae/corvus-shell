@@ -15,8 +15,8 @@ clang++ -Wall -Wextra -std=c++17 -o corvus main.cpp
 ## Features
 
 - [x] Command execution
-- [ ] Built-in commands
-- [ ] Pipes
+- [ ] Built-in commands (WIP)
+- [ ] Pipes (WIP)
 - [ ] Redirections
 
 ## License
