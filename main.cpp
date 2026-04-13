@@ -6,12 +6,23 @@
 #include <map>
 #include <functional>
 #include <cstdlib>
+#include <csignal>
 #include "parser.h"
 #include "builtins.h"
 #include "executor.h"
 
+void handle_sigint(int sig) {
+    write(STDOUT_FILENO, "\n", 1);
+}
+
 int main() {
     std::string input;
+    struct sigaction sa;
+    sa.sa_handler = handle_sigint;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = SA_RESTART;
+    sigaction(SIGINT, &sa, nullptr);
+    
     while (true) {
         std::cout << "corvus >> ";
         std::getline(std::cin, input);
