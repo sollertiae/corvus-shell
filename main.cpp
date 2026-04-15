@@ -33,7 +33,7 @@ int main() {
         ParsedPipeline parsed_input = parse_pipeline(input);
         if (parsed_input.commands.size() == 1) {
             if(builtins_map.count(parsed_input.commands[0][0])) {
-                builtins_map[parsed_input.commands[0][0]](parsed_input.commands[0]);
+                builtins_map[parsed_input.commands[0][0]].fn(parsed_input.commands[0]);
             } else {
                 execute_command(parsed_input.commands[0]);
                 waitpid(-1, nullptr, 0);
