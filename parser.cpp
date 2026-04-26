@@ -1,5 +1,6 @@
 #include "parser.h"
 #include <cstring>
+#include <iostream>
 
 std::vector<char*> read_input(std::string& input) {
     std::vector<char*> args;
@@ -44,17 +45,25 @@ Redirection parse_redirections(std::string& input) {
                 commands.append = true;
                 ++i;
             } 
+            ++i;
             while (i < input.size() && input[i] == ' ') 
                 ++i;
-            commands.output_file = input.substr(i, input.size() - i);
-            break;
+            
+            size_t start = i;
+            while (i < input.size() && input[i] != ' ' && input[i] != '>' && input[i] != '<')
+                ++i;
+            commands.output_file = input.substr(start, i - start);
         } else if (input[i] == '<') {
             commands.append = false;
             ++i;
             while (i < input.size() && input[i] == ' ') 
                 ++i;
-            commands.input_file = input.substr(i, input.size() - i);
-            break;
+
+            size_t start = i;
+            while (i < input.size() && input[i] != ' ' && input[i] != '>' && input[i] != '<')
+                ++i;
+
+            commands.input_file = input.substr(start, i - start);
         } else {
             current += input[i];
         }
