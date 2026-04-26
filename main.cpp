@@ -35,11 +35,11 @@ int main() {
             if(builtins_map.count(parsed_input.commands[0][0])) {
                 builtins_map[parsed_input.commands[0][0]].fn(parsed_input.commands[0]);
             } else {
-                execute_command(parsed_input.commands[0]);
+                execute_command(parsed_input.commands[0], parsed_input.redirections[0]);
                 waitpid(-1, nullptr, 0);
             }
         } else {
-            execute_pipeline(parsed_input.commands);
+            execute_pipeline(parsed_input.commands, parsed_input.redirections);
         }
     }    
     return 0;
