@@ -3,3 +3,6 @@ corvus
 
 # objects
 *.o
+
+# test
+*.txt
